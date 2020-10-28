@@ -17,10 +17,10 @@ namespace FirstWebApp.Data.Mocks
                 return new List<Car>
                 {
                     new Car { 
-                        name = "Tesla",
+                        name = "Tesla Model-S",
                         shortDescription = "",
                         longDescription = "",
-                        img = "",
+                        img = "/img/Model-S.jpg",
                         price = 45000,
                         isFavourite = true,
                         available = true,
@@ -30,7 +30,7 @@ namespace FirstWebApp.Data.Mocks
                         name = "BMW X5",
                         shortDescription = "",
                         longDescription = "",
-                        img = "",
+                        img = "/img/BMW-X5.jpg",
                         price = 45000,
                         isFavourite = true,
                         available = true,
