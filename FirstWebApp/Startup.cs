@@ -22,7 +22,7 @@ namespace FirstWebApp
 
         public Startup(IHostingEnvironment hostEnv)
         {
-            _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettin.json").Build();
+            _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -42,6 +42,12 @@ namespace FirstWebApp
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+                DBObjects.Initial(content);
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace FirstWebApp.Data.Mocks
                         isFavourite = true,
                         available = true,
                         Category = _categoryCars.AllCategories.Last()
-                    },
+                    }
                 };
             }
         }
