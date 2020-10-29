@@ -15,7 +15,7 @@ namespace FirstWebApp.Data.Mocks
             {
                 return new List<Category>
                 {
-                    new Category { categoryName = "Электомобили", description = "Современный вид транспорта"},
+                    new Category { categoryName = "Электромобили", description = "Современный вид транспорта"},
                     new Category { categoryName = "Классические автомобили", description = "Машина с двигателем внутреннего сгорания"}
                 };
             }

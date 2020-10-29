@@ -1,4 +1,5 @@
 ﻿using FirstWebApp.Data.Interfaces;
+using FirstWebApp.Data.Models;
 using FirstWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,14 +20,40 @@ namespace FirstWebApp.Controllers
             _allCategories = iCarsCategory;
         }
 
-        public ViewResult List()
+        [Route("Cars/List")]
+        [Route("Cars/List/{category}")]
+        public ViewResult List(string category)
         {
-            ViewBag.Title = "Страница с автомобилями";
-            CarsListViewModel obj = new CarsListViewModel();
-            obj.AllCars = _allCars.Cars;
-            obj.currCategory = "Автомобили";
+            string _category = category;
+            string currCategory = "";
+            IEnumerable<Car> cars = null;
 
-            return View(obj);
+            if(string.IsNullOrEmpty(category))
+            {
+                cars = _allCars.Cars.OrderBy(i => i.id);
+            } else
+            {
+                if(string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Электромобили")).OrderBy(i => i.id);
+                    currCategory = "Электромобили";
+                } else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Классические автомобили")).OrderBy(i => i.id);
+                    currCategory = "Классические автомобили";
+                }
+            }
+
+            var carObj = new CarsListViewModel
+            {
+                AllCars = cars,
+                currCategory = currCategory
+            };
+
+
+            ViewBag.Title = "Страница с автомобилями";
+
+            return View(carObj);
         }
     }
 }
